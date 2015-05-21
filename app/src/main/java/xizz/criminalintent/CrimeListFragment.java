@@ -16,15 +16,13 @@ import java.util.List;
 public class CrimeListFragment extends ListFragment {
 	private static final String TAG = "CrimeListFragment";
 
-	private List<Crime> mCrimes;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getActivity().setTitle(R.string.crimes_title);
-		mCrimes = CrimeLab.get(getActivity()).getCrimes();
+		final List<Crime> crimes = CrimeLab.get(getActivity()).getCrimes();
 
-		CrimeAdapter adapter = new CrimeAdapter(mCrimes);
+		CrimeAdapter adapter = new CrimeAdapter(crimes);
 		setListAdapter(adapter);
 	}
 
