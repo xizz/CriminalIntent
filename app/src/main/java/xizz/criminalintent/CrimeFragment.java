@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
@@ -44,17 +45,19 @@ public class CrimeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle
 			savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_crime, container, false);
+		final List<Crime> crimes = CrimeLab.get(getActivity()).getCrimes();
 
 		mTitleField = (EditText) v.findViewById(R.id.crime_title);
 		mTitleField.setText(mCrime.title);
 		mTitleField.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				mCrime.title = s.toString();
-			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) { }
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				int i = crimes.size();
+				mCrime.title = s.toString();
+			}
 
 			@Override
 			public void afterTextChanged(Editable s) { }

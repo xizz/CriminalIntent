@@ -23,6 +23,7 @@ public class CrimeListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		getActivity().setTitle(R.string.crimes_title);
 		mCrimes = CrimeLab.get(getActivity()).getCrimes();
+
 		CrimeAdapter adapter = new CrimeAdapter(mCrimes);
 		setListAdapter(adapter);
 	}
@@ -32,13 +33,14 @@ public class CrimeListFragment extends ListFragment {
 		Crime c = (Crime) (getListAdapter()).getItem(position);
 		Log.d(TAG, c.title + " was clicked");
 
-		Intent i = new Intent(getActivity(), CrimeActivity.class);
+		Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 		i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.id);
-		startActivityForResult(i, 0);
+		startActivity(i);
 	}
 
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onResume() {
+		super.onResume();
 		((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 
