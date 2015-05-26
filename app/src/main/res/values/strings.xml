@@ -16,5 +16,5 @@
 	<string name="subtitle">Sometimes tolerance is not a virtue.</string>
 	<string name="empty_text">There are no crimes.</string>
 
-
+	<string name="delete_crime">Delete Crime</string>
 </resources>
