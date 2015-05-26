@@ -11,11 +11,13 @@ public class Crime {
 	private static final String JSON_TITLE = "title";
 	private static final String JSON_DATE = "date";
 	private static final String JSON_SOLVED = "solved";
+	private static final String JSON_PHOTO = "photo";
 
 	public UUID id;
 	public String title;
 	public Date date;
 	public boolean solved;
+	public Photo photo;
 
 	public Crime() {
 		id = UUID.randomUUID();
