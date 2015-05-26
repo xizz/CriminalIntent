@@ -9,4 +9,12 @@
 
 	<string name="date_time_picker_title">Date/Time of crime:</string>
 	<string name="crimes_title">Crimes</string>
+
+	<string name="new_crime">New Crime</string>
+	<string name="show_subtitle">Show Subtitle</string>
+	<string name="hide_subtitle">Hide Subtitle</string>
+	<string name="subtitle">Sometimes tolerance is not a virtue.</string>
+	<string name="empty_text">There are no crimes.</string>
+
+
 </resources>
