@@ -14,15 +14,15 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DatePickerFragment extends DialogFragment {
+public class DateTimePickerFragment extends DialogFragment {
 	public static final String EXTRA_DATE = "criminalintent.DATE";
 
-	public static DatePickerFragment newInstance(Date date) {
+	public static DateTimePickerFragment newInstance(Date date) {
 		// try to set mDate directly does not work because date passed in is on a different thread
 		Bundle args = new Bundle();
 		args.putSerializable(EXTRA_DATE, date);
 
-		DatePickerFragment fragment = new DatePickerFragment();
+		DateTimePickerFragment fragment = new DateTimePickerFragment();
 		fragment.setArguments(args);
 
 		return fragment;
