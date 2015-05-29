@@ -17,7 +17,7 @@ public class Crime {
 	public String title;
 	public Date date;
 	public boolean solved;
-	public Photo photo;
+	public String photo;
 
 	public Crime() {
 		id = UUID.randomUUID();
@@ -29,6 +29,8 @@ public class Crime {
 		title = json.getString(JSON_TITLE);
 		solved = json.getBoolean(JSON_SOLVED);
 		date = new Date(json.getLong(JSON_DATE));
+		if (json.has(JSON_PHOTO))
+			photo = json.getString(JSON_PHOTO);
 	}
 
 	public JSONObject toJSON() throws JSONException {
@@ -37,6 +39,7 @@ public class Crime {
 		json.put(JSON_TITLE, title);
 		json.put(JSON_DATE, date.getTime());
 		json.put(JSON_SOLVED, solved);
+		json.put(JSON_PHOTO, photo);
 		return json;
 	}
 }

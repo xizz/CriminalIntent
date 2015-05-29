@@ -139,12 +139,11 @@ public class CrimeFragment extends Fragment {
 		mPhotoView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Photo p = mCrime.photo;
-				if (p == null)
+				if (mCrime.photo == null)
 					return;
 
 				FragmentManager fm = getActivity().getFragmentManager();
-				String path = getActivity().getFileStreamPath(p.filename).getAbsolutePath();
+				String path = getActivity().getFileStreamPath(mCrime.photo).getAbsolutePath();
 				ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
 			}
 		});
@@ -166,7 +165,7 @@ public class CrimeFragment extends Fragment {
 				String filename = data.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
 				if (filename != null) {
 					Log.d(TAG, "filename: " + filename);
-					mCrime.photo = new Photo(filename);
+					mCrime.photo = filename;
 					Log.d(TAG, "Crime: " + mCrime.title + " has a photo");
 					showPhoto();
 				}
@@ -192,10 +191,9 @@ public class CrimeFragment extends Fragment {
 	}
 
 	private void showPhoto() {
-		Photo p = mCrime.photo;
 		BitmapDrawable b = null;
-		if (p != null) {
-			String path = getActivity().getFileStreamPath(p.filename).getAbsolutePath();
+		if (mCrime.photo != null) {
+			String path = getActivity().getFileStreamPath(mCrime.photo).getAbsolutePath();
 			b = PictureUtils.getScaledDrawable(getActivity(), path);
 		}
 		mPhotoView.setImageDrawable(b);

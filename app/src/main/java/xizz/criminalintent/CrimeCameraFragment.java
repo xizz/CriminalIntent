@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -138,6 +139,8 @@ public class CrimeCameraFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		mCamera = Camera.open(0);
+		CameraManager manager =
+				(CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
 	}
 
 	@Override
