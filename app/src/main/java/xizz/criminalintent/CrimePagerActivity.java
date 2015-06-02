@@ -9,7 +9,7 @@ import android.support.v4.view.ViewPager;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends Activity {
+public class CrimePagerActivity extends Activity implements CrimeFragment.Callbacks {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +52,10 @@ public class CrimePagerActivity extends Activity {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void onCrimeUpdated(Crime crime) {
+		setTitle(crime.title);
 	}
 }

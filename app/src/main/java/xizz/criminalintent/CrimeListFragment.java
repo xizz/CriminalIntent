@@ -1,8 +1,8 @@
 package xizz.criminalintent;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -22,8 +22,8 @@ import java.util.List;
 
 public class CrimeListFragment extends ListFragment {
 	private static final String TAG = "CrimeListFragment";
-
 	private boolean mSubtitleVisible;
+	private Callbacks mCallbacks;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,13 +39,22 @@ public class CrimeListFragment extends ListFragment {
 	}
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mCallbacks = (Callbacks) activity;
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = null;
+	}
+
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Crime c = (Crime) (getListAdapter()).getItem(position);
 		Log.d(TAG, c.title + " was clicked");
-
-		Intent i = new Intent(getActivity(), CrimePagerActivity.class);
-		i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.id);
-		startActivity(i);
+		mCallbacks.onCrimeSelected(c);
 	}
 
 	@Override
@@ -121,9 +130,8 @@ public class CrimeListFragment extends ListFragment {
 			case R.id.menu_item_new_crime:
 				Crime crime = new Crime();
 				CrimeLab.get(getActivity()).addCrime(crime);
-				Intent i = new Intent(getActivity(), CrimePagerActivity.class);
-				i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.id);
-				startActivityForResult(i, 0);
+				((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+				mCallbacks.onCrimeSelected(crime);
 				return true;
 			case R.id.menu_item_show_subtitle:
 				ActionBar actionBar = getActivity().getActionBar();
@@ -142,6 +150,14 @@ public class CrimeListFragment extends ListFragment {
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	public void updateUI() {
+		((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+	}
+
+	public interface Callbacks {
+		void onCrimeSelected(Crime crime);
 	}
 
 	private class CrimeAdapter extends ArrayAdapter<Crime> {
@@ -171,5 +187,4 @@ public class CrimeListFragment extends ListFragment {
 			return convertView;
 		}
 	}
-
 }
