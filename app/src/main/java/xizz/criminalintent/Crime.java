@@ -12,12 +12,14 @@ public class Crime {
 	private static final String JSON_DATE = "date";
 	private static final String JSON_SOLVED = "solved";
 	private static final String JSON_PHOTO = "photo";
+	private static final String JSON_SUSPECT = "suspect";
 
 	public UUID id;
 	public String title;
 	public Date date;
 	public boolean solved;
 	public String photo;
+	public String suspect;
 
 	public Crime() {
 		id = UUID.randomUUID();
@@ -31,6 +33,8 @@ public class Crime {
 		date = new Date(json.getLong(JSON_DATE));
 		if (json.has(JSON_PHOTO))
 			photo = json.getString(JSON_PHOTO);
+		if (json.has(JSON_SUSPECT))
+			suspect = json.getString(JSON_SUSPECT);
 	}
 
 	public JSONObject toJSON() throws JSONException {
@@ -40,6 +44,7 @@ public class Crime {
 		json.put(JSON_DATE, date.getTime());
 		json.put(JSON_SOLVED, solved);
 		json.put(JSON_PHOTO, photo);
+		json.put(JSON_SUSPECT, suspect);
 		return json;
 	}
 }
