@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,8 +87,6 @@ public class CrimeCameraFragment extends Fragment {
 
 		mSurfaceView = (SurfaceView) v.findViewById(R.id.crime_camera_surfaceView);
 		SurfaceHolder holder = mSurfaceView.getHolder();
-		// deprecated, but required for pre-3.0 devices
-		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		holder.addCallback(new SurfaceHolder.Callback() {
 			@Override
 			public void surfaceCreated(SurfaceHolder holder) {
@@ -139,8 +136,6 @@ public class CrimeCameraFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		mCamera = Camera.open(0);
-		CameraManager manager =
-				(CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
 	}
 
 	@Override
