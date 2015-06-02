@@ -27,9 +27,8 @@ public class CrimeListActivity extends SingleFragmentActivity
 			Fragment oldDetail = fm.findFragmentById(R.id.detailFragmentContainer);
 			Fragment newDetail = CrimeFragment.newInstance(crime.id);
 
-			if (oldDetail != null) {
+			if (oldDetail != null)
 				ft.remove(oldDetail);
-			}
 
 			ft.add(R.id.detailFragmentContainer, newDetail);
 			ft.commit();
